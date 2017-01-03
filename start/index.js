@@ -7,5 +7,8 @@ handle['/start'] = reqHandlers.start;
 handle['/upload'] = reqHandlers.upload;
 handle['/login'] = reqHandlers.login;
 handle['/show'] = reqHandlers.show;
+handle['/test/'] = reqHandlers.test;
+handle['/spider'] = reqHandlers.spider;
+handle['/newslist'] = reqHandlers.newslist;
 
 server.start(route.route,handle);

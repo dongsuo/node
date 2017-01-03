@@ -4,7 +4,10 @@
   "description": "a practice\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[C\u001b[C\u001b[some practice code about node learning",
   "main": "index.js",
   "dependencies": {
-    "formidable": "^1.0.17"
+    "cheerio": "^0.22.0",
+    "formidable": "^1.0.17",
+    "superagent": "^3.3.1",
+    "utility": "^1.9.0"
   },
   "devDependencies": {},
   "scripts": {
