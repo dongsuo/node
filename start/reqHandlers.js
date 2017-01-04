@@ -5,6 +5,8 @@ var formidable = require("formidable");
 var utility = require('utility');
 var superagent = require('superagent');
 var cheerio = require('cheerio');
+var url = require('url');
+var cb = require('./callback');
 
 function start(res) {
     console.log('function start called');
@@ -111,12 +113,56 @@ function spider(res,req){
 
 function newslist(res,req){
     var news;
-    superagent.get('http://v.juhe.cn/toutiao/index?type=top&key=76254d54157283ab2ea8bb6fb800af39')
+    superagent.get('http://apis.juhe.cn/goodbook/catalog?key=b6334d9686b673659c722e957d86844f&dtype=json')
     .end(function(err,sres){
-        // console.log(sres);
-
+        console.log(sres.res.text);
+        var result = 'yo!';
+        result = sres.Response;
         res.writeHead(200, { 'Content-Type': 'text/plain' });
-        res.write('hello news'+'\n'+ JSON.stringify(sres))
+        res.write('hello news'+'\n'+ JSON.stringify(sres)+'\n'+ 'result'+'\n'+result)
+
+        res.end();
+    })
+}
+
+function getBookCatalog(res,req){
+    // console.log(req.url)
+    var callback = cb.callback(req)
+    // console.log(callback)
+    superagent.get('http://apis.juhe.cn/goodbook/catalog?key=b6334d9686b673659c722e957d86844f&dtype=json')
+    .end(function(err,sres){
+        console.log(sres.res.text);
+        var result = 'yo!';
+        result = sres.res.text;
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        json = JSON.stringify(result)
+        var callbackJson = callback + '('+ json +')';
+        res.write(callbackJson)
+        // res.write('hello news'+'\n'+ JSON.stringify(sres)+'\n'+ 'result'+'\n'+result)
+
+        res.end();
+    })
+}
+
+function getBookInfo(res,req){
+    // console.log(req.url)
+    var BASEURL = 'http://apis.juhe.cn/goodbook/query?key=b6334d9686b673659c722e957d86844f'
+    var callback = cb.callback(req);
+    var query = url.parse(req.url).query;
+    queryJson = querystring.parse(query);
+    var concatUrl = BASEURL+'&catalog_id='+ queryJson.catalog_id+'&pn='+queryJson.pn+'&rn='+queryJson.rn;
+    // console.log(callback)
+    superagent.get(concatUrl)
+    .end(function(err,sres){
+        // console.log(sres.res.text);
+        var result = 'yo!';
+        result = sres.res.text;
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        json = JSON.stringify(result)
+        var callbackJson = callback + '('+ json +')';
+        res.write(callbackJson)
+        // res.write('hello news'+'\n'+ JSON.stringify(sres)+'\n'+ 'result'+'\n'+result)
+
         res.end();
     })
 }
@@ -128,3 +174,5 @@ exports.show = show;
 exports.test = test;
 exports.spider = spider;
 exports.newslist = newslist;
+exports.getBookCatalog = getBookCatalog;
+exports.getBookInfo = getBookInfo;

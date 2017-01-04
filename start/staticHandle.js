@@ -3,7 +3,7 @@ var path = require('path');
 var mine = require('./mine').types;
 
 function staticHandle(response, pathname) {
-    var realPath = path.join("./src", pathname);
+    var realPath = path.join("./book", pathname);
     console.log(realPath)
     var ext = path.extname(realPath);
     ext = ext ? ext.slice(1) : 'unknown';

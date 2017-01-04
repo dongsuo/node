@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>图书数据</title>
+</head>
+<body>
+<h1>图书列表</h1>
+<script>
+	function getBookCatalog(res){
+		console.log(res)
+		var jsonRes = JSON.parse(res)
+		console.log(jsonRes)
+	}
+	function getBookInfo(res){
+		console.log(res)
+	}
+</script>
+<script src="http://127.0.0.1:1337/getBookCatalog?callback=getBookCatalog"></script>
+<script src="http://127.0.0.1:1337/getBookInfo?catalog_id=252&pn=1&rn=30&callback=getBookInfo"></script>
+</body>
+
+</html>

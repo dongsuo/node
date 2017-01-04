@@ -10,5 +10,8 @@ handle['/show'] = reqHandlers.show;
 handle['/test/'] = reqHandlers.test;
 handle['/spider'] = reqHandlers.spider;
 handle['/newslist'] = reqHandlers.newslist;
+handle['/getBookCatalog'] = reqHandlers.getBookCatalog;
+handle['/getBookInfo'] = reqHandlers.getBookInfo;
+
 
 server.start(route.route,handle);
